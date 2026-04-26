@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp Cưới - Chú Rể & Cô Dâu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B0000;
+    --crimson-light: #A52020;
+    --crimson-dark: #5C0000;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --cream: #F5EDE0;
+    --cream-dark: #EDE0CC;
+    --text-dark: #2C1010;
+    --text-mid: #5A3030;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #c8b89a;
+    font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 520px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Dragon pattern background */
+  .card::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 10 C50 20, 30 20, 25 35 C20 50, 30 60, 20 75 C10 90, 15 100, 25 105 C35 110, 50 105, 60 95 C70 105, 85 110, 95 105 C105 100, 110 90, 100 75 C90 60, 100 50, 95 35 C90 20, 70 20, 60 10Z' fill='none' stroke='%23C9A84C' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HEADER ===== */
+  .header-banner {
+    background: var(--crimson-dark);
+    padding: 18px 20px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-banner::before, .header-banner::after {
+    content: '🐉';
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.25;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .header-banner::before { left: -10px; }
+  .header-banner::after { right: -10px; transform: translateY(-50%) scaleX(-1); }
+
+  .dragon-pattern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .dragon-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .dragon-icon {
+    color: var(--gold);
+    font-size: 22px;
+    filter: drop-shadow(0 0 6px rgba(201,168,76,0.6));
+  }
+
+  /* ===== COUPLE SECTION ===== */
+  .couple-section {
+    padding: 28px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .person {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #D0C4B0;
+    border: 3px solid var(--crimson);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .avatar svg {
+    width: 60px;
+    height: 60px;
+    fill: #a09080;
+  }
+
+  .person-label {
+    font-size: 11px;
+    color: var(--text-mid);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .person-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--crimson);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .double-happiness {
+    width: 70px;
+    height: 70px;
+    background: var(--crimson);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: var(--gold);
+    flex-shrink: 0;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 15px rgba(139,0,0,0.3);
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    background: var(--crimson);
+    padding: 11px 20px;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Noto Serif', serif;
+  }
+
+  /* ===== WEDDING INFO ===== */
+  .info-section {
+    padding: 24px 24px 20px;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .parents-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 22px;
+    align-items: flex-start;
+  }
+
+  .parent-block {
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+
+  .parent-block .ong-ba {
+    font-size: 11px;
+    color: #888;
+  }
+
+  .parent-block strong {
+    display: block;
+    color: var(--crimson);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .parent-divider {
+    width: 1px;
+    background: var(--crimson);
+    opacity: 0.3;
+    align-self: stretch;
+  }
+
+  .announce-text {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--text-mid);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    text-transform: uppercase;
+  }
+
+  .groom-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--crimson);
+    text-align: center;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .bride-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--crimson);
+    text-align: center;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .role-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .ampersand {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin: 4px 0 10px;
+    display: block;
+  }
+
+  /* ===== PARTY INFO ===== */
+  .party-section {
+    padding: 24px 24px 20px;
+    background: var(--cream);
+  }
+
+  .time-announce {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 4px;
+  }
+
+  .time-main {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: var(--crimson);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .date-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .date-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  .date-separator { width: 1px; height: 30px; background: var(--crimson); opacity: 0.4; }
+
+  .date-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: var(--crimson);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .date-month-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  .date-year {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .lunar-date {
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .time-blocks {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+  }
+
+  .time-block {
+    text-align: center;
+  }
+
+  .time-block-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 4px;
+  }
+
+  .time-block-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--crimson);
+    font-weight: 700;
+  }
+
+  /* ===== COUNTDOWN ===== */
+  .countdown-section {
+    text-align: center;
+    padding: 14px 20px;
+    background: var(--cream);
+  }
+
+  .countdown-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+  }
+
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    background: var(--crimson-dark);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 2px;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .countdown-unit-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* ===== CALENDAR ===== */
+  .calendar-section {
+    padding: 10px 16px 16px;
+    background: var(--cream);
+  }
+
+  .cal-header {
+    text-align: center;
+    font-size: 13px;
+    color: var(--crimson);
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: rgba(139,0,0,0.08);
+    padding: 6px;
+    border: 1px solid rgba(139,0,0,0.15);
+    margin-bottom: 8px;
+    border-radius: 2px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .cal-day-name {
+    text-align: center;
+    font-size: 10px;
+    color: var(--text-mid);
+    padding: 4px 2px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .cal-day {
+    text-align: center;
+    font-size: 12px;
+    padding: 5px 2px;
+    color: var(--text-dark);
+    border-radius: 2px;
+  }
+
+  .cal-day.empty { background: transparent; }
+  .cal-day.today-wedding {
+    background: var(--crimson);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    margin: auto;
+    font-size: 11px;
+  }
+
+  .cal-day.today-wedding::after {
+    content: '❤️';
+    display: none;
+  }
+
+  .wedding-heart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: var(--crimson);
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    margin: auto;
+  }
+
+
+  /* ===== GUESTBOOK ===== */
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== GIFT BOX ===== */
+  .gift-banner {
+    background: var(--crimson-dark);
+    padding: 18px 20px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gift-banner::before, .gift-banner::after {
+    content: '🐉';
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.25;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .gift-banner::before { left: -10px; }
+  .gift-banner::after { right: -10px; transform: translateY(-50%) scaleX(-1); }
+
+  .gift-section {
+    padding: 30px 20px 40px;
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .gift-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  /* Li xi envelope */
+  .envelope-container {
+    position: relative;
+    width: 120px;
+    height: 155px;
+    margin: 0 auto 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .envelope-container:hover .envelope { transform: scale(1.05); }
+  .envelope-container:hover .coin { animation: coinBounce 0.4s ease infinite alternate; }
+
+  .envelope {
+    width: 120px;
+    height: 155px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+
+  .envelope-body {
+    width: 120px;
+    height: 155px;
+    background: linear-gradient(135deg, #c0392b 0%, #96281b 50%, #7b241c 100%);
+    border-radius: 8px;
+    position: relative;
+    border: 2px solid #8B0000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .envelope-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    border: 2px solid var(--gold);
+  }
+
+  .envelope-corner.tl { top: 8px; left: 8px; }
+  .envelope-corner.tr { top: 8px; right: 8px; }
+  .envelope-corner.bl { bottom: 8px; left: 8px; }
+  .envelope-corner.br { bottom: 8px; right: 8px; }
+
+  .envelope-emblem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--gold-light), var(--gold));
+    border-radius: 50%;
+    border: 3px solid var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--crimson-dark);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.4);
+  }
+
+  .coin {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, #FFE066, #C9A84C);
+    border-radius: 50%;
+    border: 2px solid #FFD700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  .coin-1 { top: -6px; left: -8px; }
+  .coin-2 { top: -8px; right: 10px; }
+  .coin-3 { bottom: 10px; right: -8px; }
+  .coin-4 { bottom: -4px; left: 4px; }
+
+  @keyframes coinBounce {
+    from { transform: translateY(0) rotate(0deg); }
+    to { transform: translateY(-4px) rotate(10deg); }
+  }
+
+  .tap-label {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .gift-footer-text {
+    font-size: 14px;
+    color: var(--text-mid);
+    font-style: italic;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  /* ===== QR MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.show {
+    display: flex;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .modal-box {
+    background: var(--cream);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 320px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    background: var(--crimson);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-title {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .modal-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.35); }
+
+  .modal-body {
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .qr-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border: 1px solid rgba(139,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .qr-tab {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    background: white;
+    border: none;
+    color: var(--text-mid);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .qr-tab.active {
+    background: var(--crimson);
+    color: white;
+  }
+
+  .qr-panel { display: none; }
+  .qr-panel.active { display: block; }
+
+  .person-name-modal {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--crimson);
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+
+  .qr-placeholder {
+    width: 160px;
+    height: 160px;
+    margin: 12px auto;
+    background: white;
+    border: 2px solid rgba(139,0,0,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 8px;
+  }
+
+  .qr-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* QR code pattern generated via CSS */
+  .qr-svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  .bank-info {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-top: 6px;
+  }
+
+  .bank-name {
+    font-weight: 700;
+    color: var(--crimson);
+    font-size: 13px;
+  }
+
+  .account-number {
+    font-family: monospace;
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    margin: 4px 0;
+  }
+
+  .save-qr-btn {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 8px 20px;
+    background: var(--crimson);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Noto Serif', serif;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+
+  .save-qr-btn:hover { background: var(--crimson-light); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--crimson-dark);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-date {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== RSVP MODAL ===== */
+
+
+
+  /* Responsive */
+  @media (max-width: 540px) {
+    .card { max-width: 100%; }
+    .groom-name, .bride-name { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header-banner">
+    <div class="dragon-pattern">
+      <div class="dragon-line"></div>
+      <div class="dragon-icon">🐉</div>
+      <div class="dragon-line"></div>
+      <div class="dragon-icon">🐉</div>
+      <div class="dragon-line"></div>
+    </div>
+  </div>
+
+  <!-- COUPLE -->
+  <div class="couple-section">
+    <div class="person">
+      <div class="avatar">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="28" r="16" fill="#b0a090"/>
+          <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
+        </svg>
+      </div>
+      <div class="person-label">Trưởng Nam</div>
+      <div class="person-name">Chú Rể</div>
+    </div>
+
+    <div class="double-happiness">喜喜</div>
+
+    <div class="person">
+      <div class="avatar">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="28" r="16" fill="#b0a090"/>
+          <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
+        </svg>
+      </div>
+      <div class="person-label">Út Nữ</div>
+      <div class="person-name">Cô Dâu</div>
+    </div>
+  </div>
+
+  <!-- THONG TIN LE CUOI -->
+  <div class="section-header">Thông Tin Lễ Cưới</div>
+
+  <div class="info-section">
+    <div class="parents-row">
+      <div class="parent-block">
+        <div class="ong-ba">Ông Bà</div>
+        <strong>Họ Tên Cha Chú Rể</strong>
+        <strong>Họ Tên Mẹ Chú Rể</strong>
+        <div style="font-size:11px;color:#888;margin-top:2px;">Địa chỉ nhà trai</div>
+      </div>
+      <div class="parent-divider"></div>
+      <div class="parent-block">
+        <div class="ong-ba">Ông Bà</div>
+        <strong>Họ Tên Cha Cô Dâu</strong>
+        <strong>Họ Tên Mẹ Cô Dâu</strong>
+        <div style="font-size:11px;color:#888;margin-top:2px;">Địa chỉ nhà gái</div>
+      </div>
+    </div>
+
+    <div class="announce-text">
+      Trân Trọng Báo Tin<br>Lễ Thành Hôn Của Con Chúng Tôi
+    </div>
+
+    <div class="groom-name">Họ Tên Chú Rể</div>
+    <div class="role-label">Trưởng Nam</div>
+    <span class="ampersand">&</span>
+    <div class="bride-name">Họ Tên Cô Dâu</div>
+    <div class="role-label">Út Nữ</div>
+  </div>
+
+  <!-- THONG TIN TIEC CUOI -->
+  <div class="section-header">Thông Tin Tiệc Cưới</div>
+
+  <div class="party-section">
+    <div class="time-announce">Tiệc cưới sẽ diễn ra vào lúc:</div>
+    <div class="time-main">18:00</div>
+
+    <div class="date-row">
+      <div class="date-label">Thứ Bảy</div>
+      <div class="date-separator"></div>
+      <div class="date-day">30</div>
+      <div class="date-separator"></div>
+      <div class="date-month-label">Tháng 05</div>
+    </div>
+
+    <div class="date-year">2026</div>
+    <div class="lunar-date">(Tức ngày 14/04 năm Bính Ngọ)</div>
+
+    <div class="time-blocks">
+      <div class="time-block">
+        <div class="time-block-label">Đón Khách</div>
+        <div class="time-block-value">17:00</div>
+      </div>
+      <div class="time-block">
+        <div class="time-block-label">Khai Tiệc</div>
+        <div class="time-block-value">18:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-section">
+    <div class="countdown-label">Cùng Đếm Ngược</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">--</span>
+        <span class="countdown-unit-label">Ngày</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">--</span>
+        <span class="countdown-unit-label">Giờ</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-mins">--</span>
+        <span class="countdown-unit-label">Phút</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-secs">--</span>
+        <span class="countdown-unit-label">Giây</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="calendar-section">
+    <div class="cal-header">Tháng 5 / 2026</div>
+    <div class="calendar-grid">
+      <!-- Day names -->
+      <div class="cal-day-name">T2</div>
+      <div class="cal-day-name">T3</div>
+      <div class="cal-day-name">T4</div>
+      <div class="cal-day-name">T5</div>
+      <div class="cal-day-name">T6</div>
+      <div class="cal-day-name">T7</div>
+      <div class="cal-day-name">CN</div>
+      <!-- Week 1: May starts on Friday -->
+      <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+      <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
+      <!-- Week 2 -->
+      <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
+      <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div>
+      <!-- Week 3 -->
+      <div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
+      <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div>
+      <!-- Week 4 -->
+      <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
+      <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div>
+      <!-- Week 5 -->
+      <div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div>
+      <div class="cal-day">29</div>
+      <div class="cal-day"><div class="wedding-heart">❤️</div></div>
+      <div class="cal-day">31</div>
+    </div>
+  </div>
+
+  <!-- SO LUU BUT --><!-- GIFT -->
+  <div class="gift-banner">
+    <div class="dragon-pattern">
+      <div class="dragon-line"></div>
+      <div class="dragon-icon">🐉</div>
+      <div class="dragon-line"></div>
+      <div class="dragon-icon">🐉</div>
+      <div class="dragon-line"></div>
+    </div>
+  </div>
+
+  <div class="gift-section">
+    <div class="gift-title">Hộp Mừng Cưới</div>
+
+    <div class="envelope-container" onclick="openGiftModal()">
+      <div class="envelope">
+        <div class="envelope-body">
+          <div class="envelope-corner tl"></div>
+          <div class="envelope-corner tr"></div>
+          <div class="envelope-corner bl"></div>
+          <div class="envelope-corner br"></div>
+          <div class="envelope-emblem">喜</div>
+        </div>
+        <div class="coin coin-1"></div>
+        <div class="coin coin-2"></div>
+        <div class="coin coin-3"></div>
+        <div class="coin coin-4"></div>
+      </div>
+    </div>
+    <div class="tap-label">Nhấn để mở</div>
+
+    <div class="gift-footer-text">Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-date">Tháng 5 / 2026</div>
+  </div>
+
+</div>
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="gift-modal" onclick="closeGiftOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">Hộp Mừng Cưới</span>
+      <button class="modal-close" onclick="closeGiftModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr-tabs">
+        <button class="qr-tab active" onclick="switchTab('groom')">Chú Rể</button>
+        <button class="qr-tab" onclick="switchTab('bride')">Cô Dâu</button>
+      </div>
+
+      <!-- Groom panel -->
+      <div class="qr-panel active" id="panel-groom">
+        <div class="person-name-modal">Chú Rể · Chú Rể</div>
+        <div class="qr-placeholder">
+          <img src="https://img.vietqr.io/image/MB-0388459783-compact2.png?accountName=DINH%20KHAC%20QUY" alt="QR MBBank Đinh Khắc Quý" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div class="bank-info">
+          <div class="bank-name">Đinh Khắc Quý</div>
+          <div>MBBank · <span class="account-number">0388459783</span></div>
+        </div>
+        <button class="save-qr-btn" onclick="saveQR('groom')">⬇ Lưu QR</button>
+      </div>
+
+      <!-- Bride panel -->
+      <div class="qr-panel" id="panel-bride">
+        <div class="person-name-modal">Cô Dâu · Cô Dâu</div>
+        <div class="qr-placeholder">
+          <img src="https://img.vietqr.io/image/MB-0388459783-compact2.png?accountName=DINH%20KHAC%20QUY" alt="QR MBBank Đinh Khắc Quý" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div class="bank-info">
+          <div class="bank-name">Đinh Khắc Quý</div>
+          <div>MBBank · <span class="account-number">0388459783</span></div>
+        </div>
+        <button class="save-qr-btn" onclick="saveQR('bride')">⬇ Lưu QR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== COUNTDOWN =====
+const weddingDate = new Date('2026-05-30T18:00:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = weddingDate - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ===== GIFT MODAL =====
+function openGiftModal() {
+  document.getElementById('gift-modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGiftModal() {
+  document.getElementById('gift-modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closeGiftOnOverlay(e) {
+  if (e.target === document.getElementById('gift-modal')) closeGiftModal();
+}
+
+let currentTab = 'groom';
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.qr-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && tab === 'groom') || (i === 1 && tab === 'bride'));
+  });
+  document.getElementById('panel-groom').classList.toggle('active', tab === 'groom');
+  document.getElementById('panel-bride').classList.toggle('active', tab === 'bride');
+}
+
+function saveQR(who) {
+  const panel = document.getElementById('panel-' + who);
+  const svg = panel.querySelector('svg');
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const canvas = document.createElement('canvas');
+  canvas.width = 300; canvas.height = 300;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, 300, 300);
+    const link = document.createElement('a');
+    link.download = 'qr-mung-cuoi-' + who + '.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  };
+  img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+}
+</script>
+</body>
+</html>
