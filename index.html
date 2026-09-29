@@ -88,16 +88,20 @@
   /* ===== COUPLE SECTION ===== */
   .couple-section {
     padding: 28px 20px 20px;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: start;
     justify-content: center;
     gap: 0;
+    --avatar-size: 90px;
+    --hy-height: 70px;
     background: var(--cream);
     position: relative;
   }
 
   .person {
-    flex: 1;
+    min-width: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,8 +109,8 @@
   }
 
   .avatar {
-    width: 90px;
-    height: 90px;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     border-radius: 50%;
     background: #D0C4B0;
     border: 3px solid var(--crimson);
@@ -136,11 +140,15 @@
     color: var(--crimson);
     font-weight: 700;
     text-align: center;
+    line-height: 1.3;
+    white-space: nowrap;
   }
 
   .double-happiness {
     width: 56px;
-    height: 70px;
+    height: var(--hy-height);
+    margin-top: calc((var(--avatar-size) - var(--hy-height)) / 2);
+    align-self: start;
     background: var(--crimson);
     display: flex;
     flex-direction: column;
@@ -974,8 +982,9 @@
   
   @media (max-width: 400px) {
     .couple-section { padding: 20px 10px 16px; gap: 0; }
-    .avatar { width: 72px; height: 72px; }
-    .double-happiness { width: 46px; height: 58px; font-size: 11px; }
+    .couple-section { --avatar-size: 72px; --hy-height: 58px; }
+    .avatar { width: var(--avatar-size); height: var(--avatar-size); }
+    .double-happiness { width: 46px; height: var(--hy-height); font-size: 11px; }
     .person-name { font-size: 16px; }
 
     .groom-name, .bride-name { font-size: 24px; }
@@ -1009,8 +1018,9 @@
     .countdown-unit { min-width: 44px; padding: 5px 6px; }
     .countdown-number { font-size: 18px; }
     .couple-section { gap: 0; }
-    .double-happiness { width: 40px; height: 50px; font-size: 10px; }
-    .avatar { width: 60px; height: 60px; }
+    .couple-section { --avatar-size: 60px; --hy-height: 50px; }
+    .double-happiness { width: 40px; height: var(--hy-height); font-size: 10px; }
+    .avatar { width: var(--avatar-size); height: var(--avatar-size); }
   }
 </style>
 </head>
@@ -1038,7 +1048,7 @@
           <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
         </svg>
       </div>
-      <div class="person-name">ĐINH KHẮC QUÝ</div>
+      <div class="person-name">ĐINH KHẮC<br>QUÝ</div>
     </div>
 
     <div class="double-happiness"><span>Song</span><span>Hỷ</span></div>
@@ -1050,7 +1060,7 @@
           <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
         </svg>
       </div>
-      <div class="person-name">NGUYỄN THỊ LAN ANH</div>
+      <div class="person-name">NGUYỄN THỊ<br>LAN ANH</div>
     </div>
   </div>
 
