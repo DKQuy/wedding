@@ -138,7 +138,7 @@
   .person-name {
     font-family: 'Playfair Display', serif;
     font-size: 14px; /* fallback */
-    font-size: min(19px, 6.8cqw);
+    font-size: min(19px, 9cqw);
     color: var(--crimson);
     font-weight: 700;
     text-align: center;
@@ -229,7 +229,6 @@
     color: var(--text-mid);
     margin-bottom: 16px;
     line-height: 1.8;
-    text-transform: uppercase;
   }
 
   .groom-name {
@@ -409,6 +408,17 @@
     margin-top: 4px;
   }
 
+  .venue-map-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--crimson);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .venue-map-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
   /* ===== COUNTDOWN ===== */
   .countdown-section {
     text-align: center;
@@ -512,24 +522,6 @@
     width: 28px;
     margin: auto;
     font-size: 11px;
-  }
-
-  .cal-day.today-wedding::after {
-    content: '❤️';
-    display: none;
-  }
-
-  .wedding-heart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background: var(--crimson);
-    border-radius: 50%;
-    color: white;
-    font-size: 14px;
-    margin: auto;
   }
 
   /* ===== COUPLE GALLERY ===== */
@@ -677,12 +669,27 @@
     width: 120px;
     height: 155px;
     margin: 0 auto 16px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    display: block;
     cursor: pointer;
     user-select: none;
   }
 
-  .envelope-container:hover .envelope { transform: scale(1.05); }
-  .envelope-container:hover .coin { animation: coinBounce 0.4s ease infinite alternate; }
+  .envelope-container:hover .envelope,
+  .envelope-container:focus-visible .envelope { transform: scale(1.05); }
+
+  .envelope-container:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 6px;
+  }
+
+  .envelope-container.is-opening .envelope { animation: envelopeOpen 0.42s ease both; }
+  .envelope-container.is-opening .coin { animation: coinBounce 0.42s ease both; }
+  .envelope-container.is-opening .coin-2 { animation-delay: 0.04s; }
+  .envelope-container.is-opening .coin-3 { animation-delay: 0.08s; }
+  .envelope-container.is-opening .coin-4 { animation-delay: 0.12s; }
 
   .envelope {
     width: 120px;
@@ -750,7 +757,14 @@
 
   @keyframes coinBounce {
     from { transform: translateY(0) rotate(0deg); }
-    to { transform: translateY(-4px) rotate(10deg); }
+    55% { transform: translateY(-10px) rotate(18deg); }
+    to { transform: translateY(0) rotate(0deg); }
+  }
+
+  @keyframes envelopeOpen {
+    0% { transform: translateY(0) scale(1); }
+    45% { transform: translateY(-10px) scale(1.06) rotate(-3deg); }
+    100% { transform: translateY(0) scale(1); }
   }
 
    .tap-label {
@@ -769,12 +783,10 @@
     50% { opacity: 1; transform: translateY(-2px); }
   }
 
-  .gift-footer-text {
-    font-size: 14px;
-    color: var(--text-mid);
-    font-style: italic;
-    margin-top: 20px;
-    line-height: 1.6;
+  @media (prefers-reduced-motion: reduce) {
+    .tap-label { animation: none; }
+    .envelope-container.is-opening .envelope,
+    .envelope-container.is-opening .coin { animation: none; }
   }
 
   /* ===== QR MODAL ===== */
@@ -968,8 +980,8 @@
   .footer-date {
     color: var(--gold);
     font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   /* ===== RSVP MODAL ===== */
@@ -1086,7 +1098,7 @@
     </div>
 
     <div class="announce-text">
-      Trân Trọng Báo Tin<br>Lễ Thành Hôn Của Con Chúng Tôi
+      Trân trọng kính mời<br>Tới dự tiệc mừng Lễ thành hôn cùng gia đình chúng tôi
     </div>
 
     <div class="groom-name">ĐINH KHẮC QUÝ</div>
@@ -1132,6 +1144,7 @@
       <div class="venue-name">Tổ hợp dịch vụ cưới và Sự kiện W.Jardin</div>
       <div class="venue-hall">Cổng 2, sảnh Forêt</div>
       <div class="venue-address">307 Nguyễn Văn Linh, Lê Chân, Hải Phòng</div>
+      <a class="venue-map-link" href="https://share.google/7MUxpZ18QVO0DEBCH" target="_blank" rel="noopener noreferrer">Xem bản đồ và chỉ đường</a>
     </div>
   </div>
 
@@ -1176,7 +1189,7 @@
       <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div>
       <div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
       <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div>
-      <div class="cal-day">13</div><div class="cal-day"><div class="wedding-heart">❤️</div></div><div class="cal-day">15</div>
+      <div class="cal-day">13</div><div class="cal-day today-wedding">14</div><div class="cal-day">15</div>
       <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div>
       <div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
       <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
@@ -1236,7 +1249,7 @@
   <div class="gift-section">
     <div class="gift-title">Hộp Mừng Cưới</div>
 
-    <div class="envelope-container" onclick="openGiftModal()">
+    <button class="envelope-container" type="button" aria-label="Mở hộp mừng cưới" onclick="openGiftModal()">
       <div class="envelope">
         <div class="envelope-body">
           <div class="envelope-corner tl"></div>
@@ -1250,15 +1263,14 @@
         <div class="coin coin-3"></div>
         <div class="coin coin-4"></div>
       </div>
-    </div>
+    </button>
     <div class="tap-label">Nhấn để mở</div>
 
-    <div class="gift-footer-text">Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!</div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-date">Tháng 11/2026</div>
+    <div class="footer-date">Sự hiện diện của Quý khách<br>là niềm vinh hạnh của gia đình chúng tôi!</div>
   </div>
 
 </div>
@@ -1377,9 +1389,20 @@ brideQrImage.alt = 'VietQR MBBANK Nguyễn Thị Lan Anh, tài khoản 852433535
 });
 
 // ===== GIFT MODAL =====
+let giftModalTimer;
+
 function openGiftModal() {
-  document.getElementById('gift-modal').classList.add('show');
-  document.body.style.overflow = 'hidden';
+  const envelopeButton = document.querySelector('.envelope-container');
+  envelopeButton.classList.remove('is-opening');
+  void envelopeButton.offsetWidth;
+  envelopeButton.classList.add('is-opening');
+  window.clearTimeout(giftModalTimer);
+  const animationDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 420;
+  giftModalTimer = window.setTimeout(() => {
+    envelopeButton.classList.remove('is-opening');
+    document.getElementById('gift-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }, animationDelay);
 }
 
 function closeGiftModal() {
