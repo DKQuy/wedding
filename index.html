@@ -102,6 +102,7 @@
   .person {
     min-width: 0;
     width: 100%;
+    container-type: inline-size;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,7 +137,8 @@
 
   .person-name {
     font-family: 'Playfair Display', serif;
-    font-size: 19px;
+    font-size: 14px; /* fallback */
+    font-size: min(19px, 6.8cqw);
     color: var(--crimson);
     font-weight: 700;
     text-align: center;
@@ -985,7 +987,6 @@
     .couple-section { --avatar-size: 72px; --hy-height: 58px; }
     .avatar { width: var(--avatar-size); height: var(--avatar-size); }
     .double-happiness { width: 46px; height: var(--hy-height); font-size: 11px; }
-    .person-name { font-size: 16px; }
 
     .groom-name, .bride-name { font-size: 24px; }
     .announce-text { font-size: 12px; }
@@ -1048,7 +1049,7 @@
           <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
         </svg>
       </div>
-      <div class="person-name">ĐINH KHẮC<br>QUÝ</div>
+      <div class="person-name">ĐINH KHẮC QUÝ</div>
     </div>
 
     <div class="double-happiness"><span>Song</span><span>Hỷ</span></div>
@@ -1060,7 +1061,7 @@
           <ellipse cx="40" cy="70" rx="24" ry="18" fill="#b0a090"/>
         </svg>
       </div>
-      <div class="person-name">NGUYỄN THỊ<br>LAN ANH</div>
+      <div class="person-name">NGUYỄN THỊ LAN ANH</div>
     </div>
   </div>
 
