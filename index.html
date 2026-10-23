@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thiệp cưới</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Ms+Madi&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Ms+Madi&family=Playfair+Display:wght@400;600&family=Roboto:wght@300&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#30530f;--bg:#fffaf7;--brown:#b28e72;--line:#30530f22;color-scheme:light}
 *{box-sizing:border-box;margin:0}
@@ -74,11 +74,12 @@ header{position:relative;min-height:840px;padding-top:210px}
 .cal i{font-style:normal;opacity:.6;font-size:11px}
 .cal .on{width:30px;min-height:0;aspect-ratio:1;background:var(--ink);color:#fff;border:0;border-radius:50%;align-self:center;justify-self:center}
 .countdown{margin:22px auto 0;padding:16px 12px;max-width:380px;background:#30530f0d;border:1px solid var(--line);border-radius:12px}
-.countdown-title{font:300 13px/1.4 'Helvetica Neue',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.countdown-title{font:300 13px/1.4 Roboto,Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase;margin-bottom:10px}
 .countdown-timer{display:flex;justify-content:center;gap:8px}
 .countdown-unit{min-width:62px;padding:8px 6px;background:var(--ink);color:#fff;border-radius:8px}
-.countdown-number{display:block;font:300 26px/1.1 'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums}
-.countdown-label{display:block;margin-top:5px;font:300 11px/1.2 'Helvetica Neue',Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.countdown-number{display:block;font:300 26px/1.1 Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums}
+.countdown-label{display:block;margin-top:5px;font:300 11px/1.2 Roboto,Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+#ct,#pt,#yr1,#yr2,.dt .d{font-weight:300}
 .btn{display:inline-block;border:1px solid var(--ink);background:none;color:var(--ink);padding:10px 26px;font:400 13px Baskerville,'Times New Roman',serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:99px}
 .btn.fill{background:var(--ink);color:#fff}
 iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px auto;border:0;border-radius:15px;background:#e6ecd9}
@@ -101,6 +102,7 @@ iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px
 dialog{border:0;border-radius:16px;padding:22px;max-width:min(420px,92vw);max-height:min(88dvh,760px);overflow-y:auto;width:100%;color:var(--ink);background:var(--bg);font:inherit;text-align:center}
 dialog::backdrop{background:#0008}
 #gd{position:fixed;inset:0;margin:auto}
+#gd>.btn{position:sticky;bottom:0;background:var(--bg);box-shadow:0 -8px 12px var(--bg)}
 dialog img.qr{width:200px;height:200px;object-fit:contain;background:#fff;border-radius:8px;margin:8px 0}
 .qrbox{margin:14px 0}.qrbox .ph{width:200px;height:200px;margin:8px auto}
 .qr-zoom{display:block;padding:0;margin:8px auto;border:0;border-radius:8px;background:#fff;cursor:zoom-in}
