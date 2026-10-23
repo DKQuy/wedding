@@ -98,7 +98,6 @@ header{position:relative;min-height:840px;padding-top:210px}
 .btn.fill{background:var(--ink);color:#fff}
 iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px auto;border:0;border-radius:15px;background:#e6ecd9}
 @media(min-width:768px){iframe{height:380px}}
-.sw{display:flex;gap:12px;justify-content:center;margin-top:12px}.sw span{width:34px;height:34px;border-radius:50%;border:1px solid var(--line)}
 
 /* timeline */
 .tl{position:relative;display:grid;grid-template-columns:1fr 16px 1fr;column-gap:22px;row-gap:30px;align-items:center;max-width:460px;margin:0 auto;padding:0 20px}
@@ -172,8 +171,6 @@ const CONFIG = {
   mapEmbed: "https://maps.google.com/maps?q=W.Jardin%2C%20307%20Nguy%E1%BB%85n%20V%C4%83n%20Linh%2C%20L%C3%AA%20Ch%C3%A2n%2C%20H%E1%BA%A3i%20Ph%C3%B2ng&output=embed",
   mapLink: "https://www.google.com/maps/search/?api=1&query=W.Jardin%2C%20307%20Nguy%E1%BB%85n%20V%C4%83n%20Linh%2C%20L%C3%AA%20Ch%C3%A2n%2C%20H%E1%BA%A3i%20Ph%C3%B2ng",
 
-  dressNote: "Trang phục dự tiệc",
-  dressColors: ["#30530f", "#b28e72", "#f4ead9"],
 
   timeline: [["10:30","Đón khách"],["11:30","Lễ thành hôn"],["12:00","Khai tiệc"]],
 
@@ -283,8 +280,6 @@ const CONFIG = {
   <div id="map"></div>
   <div class="c"><a class="btn fill" id="dir" target="_blank" rel="noopener">Chỉ đường</a></div>
 
-  <h2>Dress code</h2>
-  <p class="c" id="dress"></p><div class="sw" id="sw"></div>
 
   <img class="fl" src="assets/flower.webp" alt="" style="bottom:380px;right:-320px;rotate:-36deg">
   <h2>Lịch trình ngày cưới</h2>
@@ -429,11 +424,10 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && $('lb').open) { e.preventDefault(); $('lb').close(); }
 }, true);
 
-// Party / map / dress / timeline
+// Party / map / timeline
 $('ps').innerHTML = C.partySchedule.map(p => `<div><b>${esc(p[0])}</b><br>${esc(p[1])}</div>`).join('');
 $('venue').textContent = C.venue; $('addr').textContent = C.address; $('dir').href = C.mapLink;
 $('map').innerHTML = `<iframe title="Bản đồ" loading="lazy" ${C.mapEmbed ? `src="${esc(C.mapEmbed)}"` : ''}></iframe>`;
-$('dress').textContent = C.dressNote; $('sw').innerHTML = C.dressColors.map(c => `<span style="background:${esc(c)}"></span>`).join('');
 $('tl').innerHTML = C.timeline.map((t, i) => i % 2 ? `<li class="contents" style="display:contents"><span class="l"></span><span class="dot"></span><span class="r"><span class="t">${esc(t[0])}</span><br>${esc(t[1])}</span></li>` : `<li style="display:contents"><span class="l"><span class="t">${esc(t[0])}</span><br>${esc(t[1])}</span><span class="dot"></span><span></span></li>`).join('');
 
 // Lịch tháng
