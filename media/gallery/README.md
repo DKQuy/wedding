@@ -11,7 +11,9 @@ media/
 `-- qr/            # Bank QR images, separate from the gallery
 ```
 
-To add an image or video, put the file in the matching subfolder and add a figure inside `.gallery-grid` in `index.html`. Paths are relative to the repository root. Remove the empty-state paragraph if adding media to an empty gallery.
+The main `index.html` coverflow uses optimized JPEG copies in `optimized/`; keep the original full-resolution photos in `images/`. Add each optimized image path to the `album` list in `CONFIG` in `index.html`. The current copies are resized to a maximum dimension of 1800px to keep the page quick to load.
+
+`index2.html` has a separate `.gallery-grid` gallery. To add an image or video there, put it in the matching subfolder and add a figure inside `.gallery-grid` in `index2.html`. Paths are relative to the repository root.
 
 ```html
 <figure class="gallery-item">
