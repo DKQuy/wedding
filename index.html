@@ -93,12 +93,23 @@ iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px
 .tl .l{text-align:right;grid-column:1}.tl .r{grid-column:3}
 
 /* gift */
-.gift{display:block;margin:0 auto;border:0;background:none;color:var(--ink);cursor:pointer;font:inherit}
-.gift img{width:150px;display:block;margin:0 auto 6px}
+.gift{display:block;margin:0 auto;border:0;background:none;color:var(--ink);cursor:pointer;font:inherit;transition:transform .25s ease}
+.gift img{width:150px;display:block;margin:0 auto 6px;filter:drop-shadow(0 8px 8px #30530f24);animation:gift-float 3s ease-in-out infinite;transition:filter .25s ease}
+.gift:hover{transform:translateY(-4px)}
+.gift:hover img{filter:drop-shadow(0 12px 12px #30530f40)}
+@keyframes gift-float{50%{translate:0 -7px}}
 dialog{border:0;border-radius:16px;padding:22px;max-width:min(420px,92vw);width:100%;color:var(--ink);background:var(--bg);font:inherit;text-align:center}
 dialog::backdrop{background:#0008}
 dialog img.qr{width:200px;height:200px;object-fit:contain;background:#fff;border-radius:8px;margin:8px 0}
 .qrbox{margin:14px 0}.qrbox .ph{width:200px;height:200px;margin:8px auto}
+.qr-zoom{display:block;padding:0;margin:8px auto;border:0;border-radius:8px;background:#fff;cursor:zoom-in}
+.qr-zoom img.qr{display:block;margin:0;transition:transform .2s ease}
+.qr-zoom:hover img.qr{transform:scale(1.04)}
+#qr-preview{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:56px 16px 16px;border:0;border-radius:0;background:transparent;color:#fff;overflow:hidden}
+#qr-preview[open]{display:grid;place-items:center}
+#qr-preview::backdrop{background:rgba(0,0,0,.9)}
+#qr-preview img{display:block;width:min(82vw, min(72vh, 560px));height:min(82vw, min(72vh, 560px));object-fit:contain;background:#fff;border-radius:12px;padding:10px}
+.qr-preview-close{position:fixed;top:10px;right:12px;display:grid;place-items:center;width:40px;height:40px;border:1px solid #ffffffaa;border-radius:50%;background:#0008;color:#fff;font:400 30px/1 Arial,sans-serif;cursor:pointer}
 footer{padding:50px 30px 90px;text-align:center}
 .lb{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:52px 16px 16px;border:0;border-radius:0;background:transparent;color:#fff;overflow:hidden;text-align:center}
 .lb[open]{display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;align-items:center;gap:14px}
@@ -268,6 +279,10 @@ const CONFIG = {
 </div>
 
 <dialog id="gd"><h3 style="font:700 20px 'Times New Roman'">HỘP QUÀ MỪNG</h3><div id="gl"></div><button class="btn" style="margin-top:8px" onclick="gd.close()">Đóng</button></dialog>
+<dialog id="qr-preview" aria-label="Mã QR phóng to">
+  <button class="qr-preview-close" id="qr-preview-close" type="button" aria-label="Đóng mã QR">&times;</button>
+  <img id="qr-preview-image" alt="Mã QR phóng to">
+</dialog>
 <dialog class="lb" id="lb" aria-label="Ảnh phóng to">
   <span class="lb-count" id="lc" aria-live="polite"></span>
   <button class="lb-close" id="lb-close" type="button" aria-label="Đóng ảnh">&times;</button>
@@ -409,8 +424,18 @@ $('cal').innerHTML = `<b style="grid-column:1/-1;margin-bottom:4px">Tháng ${d.g
   Array.from({length: tot}, (_, i) => i + 1 === d.getDate() ? `<span class="on">${i + 1}</span>` : `<span>${i + 1}</span>`).join('');
 
 // Hộp quà
-$('gl').innerHTML = C.gifts.map(g => `<div class="qrbox"><h3><b>${esc(g.who)} - ${esc(g.name)}</b></h3>${g.qr ? `<img class="qr" src="${esc(g.qr)}" alt="QR ${esc(g.who)}">` : '<div class="ph">Thêm mã QR</div>'}<p>${esc(g.bank)}<br><b>${esc(g.number)}</b><br>${esc(g.name)}</p></div>`).join('');
+$('gl').innerHTML = C.gifts.map(g => `<div class="qrbox"><h3><b>${esc(g.who)} - ${esc(g.name)}</b></h3>${g.qr ? `<button class="qr-zoom" type="button" aria-label="Phóng to mã QR ${esc(g.who)}"><img class="qr" src="${esc(g.qr)}" alt="QR ${esc(g.who)}"></button>` : '<div class="ph">Thêm mã QR</div>'}<p>${esc(g.bank)}<br><b>${esc(g.number)}</b><br>${esc(g.name)}</p></div>`).join('');
 $('gb2').onclick = () => $('gd').showModal();
+$('gl').onclick = e => {
+  const button = e.target.closest('.qr-zoom');
+  if (!button) return;
+  const image = button.querySelector('img');
+  $('qr-preview-image').src = image.currentSrc || image.src;
+  $('qr-preview-image').alt = image.alt;
+  $('qr-preview').showModal();
+};
+$('qr-preview-close').onclick = () => $('qr-preview').close();
+$('qr-preview').onclick = e => { if (e.target === $('qr-preview')) $('qr-preview').close(); };
 $('thanks').textContent = C.thanks;
 
 // Nhạc
