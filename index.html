@@ -13,7 +13,7 @@ body{background:#f3efe9;color:var(--ink);font:400 15px/1.7 Baskerville,'Times Ne
 @media(min-width:768px){#page{max-width:900px;border:1px solid var(--line)}}
 h2{font:700 24px 'Times New Roman',serif;letter-spacing:1px;text-transform:uppercase;text-align:center;margin:56px 16px 24px}
 h3{font-weight:400;font-size:16px;text-align:center}
-.fl{position:absolute;width:560px;max-width:none;pointer-events:none;z-index:-1}
+.fl{position:absolute;width:560px;max-width:none;pointer-events:none;z-index:-1;opacity:.18;filter:blur(1px)}
 .c{text-align:center}
 .small{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
@@ -74,11 +74,11 @@ header{position:relative;min-height:840px;padding-top:210px}
 .cal i{font-style:normal;opacity:.6;font-size:11px}
 .cal .on{width:30px;min-height:0;aspect-ratio:1;background:var(--ink);color:#fff;border:0;border-radius:50%;align-self:center;justify-self:center}
 .countdown{margin:22px auto 0;padding:16px 12px;max-width:380px;background:#30530f0d;border:1px solid var(--line);border-radius:12px}
-.countdown-title{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.countdown-title{font:400 13px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
 .countdown-timer{display:flex;justify-content:center;gap:8px}
 .countdown-unit{min-width:62px;padding:8px 6px;background:var(--ink);color:#fff;border-radius:8px}
-.countdown-number{display:block;font:600 24px/1 'Playfair Display',serif;font-variant-numeric:tabular-nums}
-.countdown-label{display:block;margin-top:5px;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.countdown-number{display:block;font:500 26px/1.1 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
+.countdown-label{display:block;margin-top:5px;font:400 11px/1.2 Arial,Helvetica,sans-serif;letter-spacing:.04em;text-transform:uppercase}
 .btn{display:inline-block;border:1px solid var(--ink);background:none;color:var(--ink);padding:10px 26px;font:400 13px Baskerville,'Times New Roman',serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:99px}
 .btn.fill{background:var(--ink);color:#fff}
 iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px auto;border:0;border-radius:15px;background:#e6ecd9}
@@ -126,8 +126,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- =============== SỬA THÔNG TIN Ở ĐÂY =============== -->
 <script>
 const CONFIG = {
-  groom: { full: "Đinh Khắc Quý", short: "Khắc Quý", role: "Chú Rể", photo: "media/gallery/images/avarta_chu_re.jpg" },
-  bride: { full: "Nguyễn Thị Lan Anh", short: "Lan Anh", role: "Cô Dâu", photo: "media/gallery/images/avarta_co_dau.jpg" },
+  groom: { full: "Khắc Quý", short: "Khắc Quý", role: "Chú Rể", photo: "media/gallery/images/avarta_chu_re.jpg" },
+  bride: { full: "Lan Anh", short: "Lan Anh", role: "Cô Dâu", photo: "media/gallery/images/avarta_co_dau.jpg" },
   groomParents: { title: "Nhà Trai", names: ["Đinh Khắc Hạ", "Vũ Thị Lanh"], address: "Tổ dân phố Phả Lễ 1, phường Nam Triệu Giang, Thành phố Hải Phòng" },
   brideParents: { title: "Nhà Gái", names: ["Nguyễn Xuân Sơn", "Nguyễn Thị Thiết"], address: "Số nhà 161, Đường 1A, Thôn Gián Khẩu, Xã Gia Trấn, Tỉnh Ninh Bình" },
   announce: "TRÂN TRỌNG KÍNH MỜI TỚI DỰ TIỆC MỪNG LỄ THÀNH HÔN CÙNG GIA ĐÌNH CHÚNG TÔI",
@@ -378,7 +378,7 @@ place();
 
 // Lightbox
 let li = 0;
-function openLb(i) { li = i; drawLb(); $('lb').showModal(); }
+function openLb(i) { li = i; drawLb(); $('lb').showModal(); $('th').querySelector(`[data-i="${li}"]`)?.scrollIntoView({block: 'nearest', inline: 'center'}); }
 function drawLb() {
   const s = photos[li];
   $('lbi').style.display = s ? '' : 'none'; if (s) $('lbi').src = s;
@@ -392,6 +392,9 @@ $('ln').onclick = () => { if (n > 1) { li = (li + 1) % n; drawLb(); } };
 $('th').onclick = e => { const x = e.target.closest('button[data-i]'); if (x) { li = +x.dataset.i; drawLb(); } };
 $('lb-close').onclick = () => $('lb').close();
 $('lb').onclick = e => { if (e.target === $('lb')) $('lb').close(); };
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('lb').open) { e.preventDefault(); $('lb').close(); }
+}, true);
 
 // Party / map / dress / timeline
 $('ps').innerHTML = C.partySchedule.map(p => `<div><b>${esc(p[0])}</b><br>${esc(p[1])}</div>`).join('');
