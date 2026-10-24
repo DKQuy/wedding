@@ -93,7 +93,7 @@ header{position:relative;min-height:840px;padding-top:210px}
 .countdown-unit{min-width:62px;padding:8px 6px;background:var(--ink);color:#fff;border-radius:8px;text-align:center}
 .countdown-number{display:block;font:300 26px/1.1 Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums}
 .countdown-label{display:block;margin-top:5px;font:300 11px/1.2 Roboto,Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase}
-#ct,#pt,#yr1,#yr2,.dt .d{font-weight:300}
+#pt,#yr2,.dt .d{font-weight:300}
 .btn{display:inline-block;border:1px solid var(--ink);background:none;color:var(--ink);padding:10px 26px;font:400 13px Baskerville,'Times New Roman',serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:99px}
 .btn.fill{background:var(--ink);color:#fff}
 iframe{display:block;width:min(calc(100% - 48px),560px);height:267px;margin:16px auto;border:0;border-radius:15px;background:#e6ecd9}
@@ -225,8 +225,6 @@ const CONFIG = {
 
   date: "2026-11-14",                 // năm-tháng-ngày
   lunar: "(Tức ngày 6/10 năm Bính Ngọ)",
-  ceremonyText: "LỄ THÀNH HÔN",
-  ceremonyTime: "11:30",
   partyTime: "10:30",
   partySchedule: [["Đón khách", "10:30"], ["Lễ thành hôn", "11:30"], ["Khai tiệc", "12:00"]],
 
@@ -295,22 +293,6 @@ const CONFIG = {
     <div class="amp" style="margin:8px 0">&amp;</div>
     <div class="big" id="bigB"></div><div class="small" id="rB"></div>
   </div>
-  <div class="c" style="margin-top:28px">
-    <p id="cer" style="padding:0 20px"></p><p>VÀO LÚC</p>
-    <div style="font-size:26px;margin:6px 0" id="ct"></div>
-    <div class="dt" id="dt1"></div>
-    <div style="font-size:20px" id="yr1"></div><div class="small" id="lunar" style="margin-top:6px"></div>
-  </div>
-  <div class="countdown" aria-label="Đếm ngược đến lễ thành hôn">
-    <div class="countdown-title">Đếm ngược đến lễ thành hôn</div>
-    <div class="countdown-timer">
-      <div class="countdown-unit"><span class="countdown-number" id="ceremony-days">00</span><span class="countdown-label">Ngày</span></div>
-      <div class="countdown-unit"><span class="countdown-number" id="ceremony-hours">00</span><span class="countdown-label">Giờ</span></div>
-      <div class="countdown-unit"><span class="countdown-number" id="ceremony-minutes">00</span><span class="countdown-label">Phút</span></div>
-      <div class="countdown-unit"><span class="countdown-number" id="ceremony-seconds">00</span><span class="countdown-label">Giây</span></div>
-    </div>
-  </div>
-
   <img class="fl" src="assets/flower.webp" alt="" style="top:1180px;left:-330px;rotate:128deg">
   <h2>Album ảnh</h2>
   <div class="album-wrap">
@@ -383,19 +365,18 @@ $('br').textContent = C.bride.role; $('bn').textContent = C.bride.short;
 // Intro
 const par = p => `<div><span>${esc(p.title)}</span>${p.names.map(n => `<b>${esc(n)}</b>`).join('')}<small>${esc(p.address)}</small></div>`;
 $('fam').innerHTML = par(C.groomParents) + par(C.brideParents);
-$('ann').textContent = C.announce; $('cer').textContent = C.ceremonyText;
+$('ann').textContent = C.announce;
 $('bigG').textContent = C.groom.full; $('rG').textContent = C.groom.role;
 $('bigB').textContent = C.bride.full; $('rB').textContent = C.bride.role;
-$('ct').textContent = C.ceremonyTime; $('pt').textContent = C.partyTime;
+$('pt').textContent = C.partyTime;
 const d = new Date(C.date + 'T00:00:00'), wd = ['CHỦ NHẬT','THỨ HAI','THỨ BA','THỨ TƯ','THỨ NĂM','THỨ SÁU','THỨ BẢY'][d.getDay()];
 const mm = String(d.getMonth() + 1).padStart(2, '0');
 const dt = `<span class="small">${wd}</span><i>|</i><span class="d">${d.getDate()}</span><i>|</i><span class="small">THÁNG ${mm}</span>`;
-$('dt1').innerHTML = $('dt2').innerHTML = dt;
-$('yr1').textContent = $('yr2').textContent = d.getFullYear();
-$('lunar').textContent = $('lunar2').textContent = C.lunar;
+$('dt2').innerHTML = dt;
+$('yr2').textContent = d.getFullYear();
+$('lunar2').textContent = C.lunar;
 const countdownTargets = [
-  ['party', new Date(`${C.date}T${C.partyTime}:00`)],
-  ['ceremony', new Date(`${C.date}T${C.ceremonyTime}:00`)]
+  ['party', new Date(`${C.date}T${C.partyTime}:00`)]
 ];
 function updateCountdown(prefix, target) {
   const remaining = Math.max(0, target.getTime() - Date.now());
