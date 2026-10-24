@@ -143,6 +143,32 @@ footer{padding:50px 30px 90px;text-align:center}
 .th img,.th .ph{display:block;width:60px;height:60px;object-fit:cover;border-radius:6px;opacity:.65}
 .th .cur{opacity:1;outline:2px solid var(--ink);outline-offset:1px}
 @media(max-width:480px){.lb{padding:52px 8px 12px}.lb .main{max-width:100%;max-height:calc(100dvh - 130px)}.th{width:calc(100vw - 72px);gap:6px}.th button{flex-basis:52px}.th img,.th .ph{width:52px;height:52px}}
+#firstpage{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:linear-gradient(180deg,#0b2f20 0%,#0c3f2d 100%);transition:opacity .45s ease,visibility .45s ease}
+#firstpage.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.falling-leaves{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.falling-leaf{position:absolute;top:-8vh;left:var(--left);width:var(--size);height:calc(var(--size)*1.45);border-radius:0 100% 0 100%;background:linear-gradient(135deg,#9cbd65,#547c38 72%);opacity:.72;animation:leaf-fall var(--duration) linear var(--delay) infinite}
+.falling-leaf::after{content:"";position:absolute;left:48%;top:12%;width:1px;height:78%;background:#d7e5a477;transform:rotate(-16deg)}
+.falling-leaf:nth-child(3n){background:linear-gradient(135deg,#c5cf82,#829b4f 72%);opacity:.6}
+.falling-leaf:nth-child(4n){border-radius:100% 0 100% 0}
+@keyframes leaf-fall{0%{transform:translate3d(0,-8vh,0) rotate(0deg)}50%{transform:translate3d(34px,50vh,0) rotate(180deg)}100%{transform:translate3d(-24px,116vh,0) rotate(360deg)}}
+.firstpage-card{position:relative;overflow:hidden;width:min(82vw,740px);min-height:520px;padding:26px 18px 26px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:#f3efe8;box-shadow:0 20px 50px rgba(0,0,0,.18);text-align:center}
+.firstpage-card::before,.firstpage-card::after{content:"";position:absolute;bottom:-36px;width:250px;height:240px;background:url('assets/flower.webp') center/cover no-repeat;opacity:.34;pointer-events:none;filter:saturate(.65) brightness(1.2)}
+.firstpage-card::before{left:-30px;transform:rotate(-16deg)}
+.firstpage-card::after{right:-28px;transform:scaleX(-1) rotate(12deg)}
+.firstpage-inner{position:relative;z-index:1;display:grid;place-items:center;min-height:468px;padding:10px 14px}
+.firstpage-badge{display:grid;place-items:center;width:76px;height:76px;margin:0 auto 12px;border-radius:50%;background:#1d4d34;box-shadow:0 10px 24px rgba(29,77,52,.25)}
+.firstpage-badge svg{display:block;width:38px;height:38px;fill:#fff}
+.firstpage-kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);opacity:.75}
+.firstpage-title{font:400 clamp(42px,5vw,78px)/0.96 'EB Garamond',serif;color:#2d4e35;margin:10px 0 8px;letter-spacing:-.05em}
+.firstpage-title-line{display:block}
+.firstpage-title .amp{display:block;font:400 36px/1 'Ms Madi',cursive;color:#2c5439;margin:6px 0}
+.firstpage-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px auto 14px;width:min(200px,52%);color:#3a5d2e;opacity:.8}
+.firstpage-divider::before,.firstpage-divider::after{content:"";display:block;width:72px;height:1px;background:currentColor;opacity:.6}
+.firstpage-divider span{font-size:16px;transform:translateY(-1px)}
+.firstpage-date{font:400 26px/1.5 'EB Garamond',serif;color:#31533a;letter-spacing:.01em}
+.firstpage-subtitle{font:400 32px/1.3 'EB Garamond',serif;color:#31533a;margin-top:18px}
+.firstpage-text{font-size:15px;line-height:1.7;margin:0 0 24px;color:rgba(48,83,15,.82)}
+#open-invite{display:inline-flex;align-items:center;justify-content:center;min-width:200px;height:58px;border:none;border-radius:999px;background:#1d4d34;color:#fff;box-shadow:0 12px 26px rgba(29,77,52,.28);font:400 22px/1 'EB Garamond',serif;letter-spacing:.02em}
 #music{position:fixed;right:14px;bottom:14px;z-index:20;width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:var(--bg);color:var(--ink);font-size:18px;cursor:pointer}
 #music.on{animation:sp 4s linear infinite}@keyframes sp{to{rotate:360deg}}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #8fb35a;outline-offset:2px}
@@ -150,6 +176,35 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 </style>
 </head>
 <body>
+<div id="firstpage" aria-live="polite">
+  <div class="falling-leaves" aria-hidden="true">
+    <span class="falling-leaf" style="--left:6%;--size:13px;--duration:12s;--delay:-8s"></span>
+    <span class="falling-leaf" style="--left:15%;--size:18px;--duration:16s;--delay:-3s"></span>
+    <span class="falling-leaf" style="--left:25%;--size:11px;--duration:14s;--delay:-11s"></span>
+    <span class="falling-leaf" style="--left:36%;--size:15px;--duration:18s;--delay:-6s"></span>
+    <span class="falling-leaf" style="--left:48%;--size:12px;--duration:13s;--delay:-1s"></span>
+    <span class="falling-leaf" style="--left:59%;--size:17px;--duration:17s;--delay:-12s"></span>
+    <span class="falling-leaf" style="--left:70%;--size:12px;--duration:15s;--delay:-5s"></span>
+    <span class="falling-leaf" style="--left:82%;--size:16px;--duration:19s;--delay:-9s"></span>
+    <span class="falling-leaf" style="--left:93%;--size:12px;--duration:14s;--delay:-2s"></span>
+  </div>
+  <div class="firstpage-card">
+    <div class="firstpage-inner">
+      <div class="firstpage-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35 10.55 20.03C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z"/></svg></div>
+      <div class="firstpage-title">
+        <span class="firstpage-title-line">Khắc Quý</span>
+        <span class="amp">&amp;</span>
+        <span class="firstpage-title-line">Lan Anh</span>
+      </div>
+      <div class="firstpage-divider"><span>✦</span></div>
+      <div class="firstpage-date">14 tháng 11, 2026</div>
+      <div class="firstpage-subtitle">Thân Mời</div>
+      <p class="firstpage-text" style="white-space:pre-line;">Mời bạn mở thiệp để cùng chúc mừng
+hạnh phúc của hai gia đình.</p>
+      <button id="open-invite" class="btn fill" type="button">Mở thiệp</button>
+    </div>
+  </div>
+</div>
 <!-- =============== SỬA THÔNG TIN Ở ĐÂY =============== -->
 <script>
 const CONFIG = {
@@ -450,17 +505,29 @@ $('qr-preview-close').onclick = () => $('qr-preview').close();
 $('qr-preview').onclick = e => { if (e.target === $('qr-preview')) $('qr-preview').close(); };
 $('thanks').textContent = C.thanks;
 
-// Nhạc
+const firstPage = $('firstpage');
+const openInviteBtn = $('open-invite');
 const aud = $('aud'), mb = $('music');
+const startMusic = () => {
+  if (!C.music || !aud || !mb || mb.dataset.off) return;
+  if (!aud.paused) return;
+  aud.volume = 0.8;
+  aud.play().then(() => mb.classList.add('on')).catch(() => {});
+};
+const closeFirstPage = () => {
+  if (!firstPage) return;
+  firstPage.classList.add('hidden');
+  startMusic();
+};
+if (openInviteBtn) openInviteBtn.onclick = closeFirstPage;
+if (firstPage) firstPage.addEventListener('click', e => {
+  if (e.target === firstPage) closeFirstPage();
+});
+
+// Nhạc
 if (C.music) {
   aud.src = C.music;
   mb.hidden = false;
-  const startMusic = () => {
-    if (aud.paused && !mb.dataset.off) {
-      aud.volume = 0.8;
-      aud.play().then(() => mb.classList.add('on')).catch(() => {});
-    }
-  };
   document.addEventListener('pointerdown', startMusic, { passive: true });
   document.addEventListener('click', startMusic);
 }
