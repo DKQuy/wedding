@@ -202,7 +202,7 @@ const CONFIG = {
     { who: "Cô Dâu", bank: "VietQR", number: "852433535", name: "NGUYỄN THỊ LAN ANH", qr: "media/qr/qr-co-dau.jpg" }
   ],
   thanks: "Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!",
-  music: ""                           // vd "nhac.mp3"
+  music: "media/music/one_life.mp3"
 };
 </script>
 
@@ -452,8 +452,31 @@ $('thanks').textContent = C.thanks;
 
 // Nhạc
 const aud = $('aud'), mb = $('music');
-if (C.music) { aud.src = C.music; mb.hidden = false; document.addEventListener('click', () => { if (aud.paused && !mb.dataset.off) { aud.play().then(() => mb.classList.add('on')).catch(() => {}); } }, {once: true}); }
-mb.onclick = e => { e.stopPropagation(); if (aud.paused) { aud.play(); mb.classList.add('on'); delete mb.dataset.off; } else { aud.pause(); mb.classList.remove('on'); mb.dataset.off = 1; } };
+if (C.music) {
+  aud.src = C.music;
+  mb.hidden = false;
+  const startMusic = () => {
+    if (aud.paused && !mb.dataset.off) {
+      aud.volume = 0.8;
+      aud.play().then(() => mb.classList.add('on')).catch(() => {});
+    }
+  };
+  document.addEventListener('pointerdown', startMusic, { passive: true });
+  document.addEventListener('click', startMusic);
+}
+mb.onclick = e => {
+  e.stopPropagation();
+  if (aud.paused) {
+    aud.volume = 0.8;
+    aud.play();
+    mb.classList.add('on');
+    delete mb.dataset.off;
+  } else {
+    aud.pause();
+    mb.classList.remove('on');
+    mb.dataset.off = 1;
+  }
+};
 </script>
 </body>
 </html>
